@@ -39,8 +39,45 @@ src/
 └── shared/              # Shared components and utilities
 ```
 
+## 🧪 Unit Testing (Vitest + React Testing Library)
+
+### Running Tests
+
+```bash
+# Run all unit tests
+pnpm test
+
+# Run tests once (CI mode)
+pnpm test -- --run
+
+# Run tests with UI
+pnpm test:ui
+
+# Run tests with coverage
+pnpm test:coverage
+```
+
+### Test Structure
+
+Unit tests are located next to the components they test with the `.test.tsx` extension.
+
+
+## 🎭 E2E Testing (Playwright)
+
+### Running E2E Tests
+
+```bash
+# Run E2E tests (starts dev server automatically)
+pnpm test:e2e
+
+# Run E2E tests with UI mode
+pnpm test:e2e:ui
+```
+
+### Test Structure
+
+E2E tests are located in the `e2e/` directory with the `.spec.ts` extension.
+
 ## Future improvements
 
 - i18n
-- Unit test with vitest
-- E2E tests with playwright
