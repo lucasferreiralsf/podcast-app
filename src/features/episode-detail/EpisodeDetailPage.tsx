@@ -1,10 +1,10 @@
-import { ApiErrorAlert } from "@/shared/components/error/ApiErrorAlert";
 import { Sidebar } from "@/shared/components/layout/Sidebar";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router";
 import { usePodcastDetail } from "../podcast-detail/hooks/usePodcastDetail";
 import { EpisodePlayer } from "./components/EpisodePlayer";
+import { NotFoundPage } from "@/shared/components/error/NotFoundPage";
 
 export function EpisodeDetailPage() {
   const { podcastId, episodeId } = useParams<{
@@ -13,16 +13,7 @@ export function EpisodeDetailPage() {
   }>();
   const navigate = useNavigate();
 
-  const { data, error, refetch } = usePodcastDetail(podcastId!);
-
-  if (error) {
-    return <ApiErrorAlert error={error as Error} onRetry={() => refetch()} />;
-  }
-
-  if (!data) {
-    return null;
-  }
-
+  const { data } = usePodcastDetail(podcastId!);
   const { podcast, episodes } = data;
 
   const episode = episodes.find(
@@ -30,12 +21,7 @@ export function EpisodeDetailPage() {
   );
 
   if (!episode) {
-    return (
-      <ApiErrorAlert
-        error={new Error("Episode not found")}
-        onRetry={() => refetch()}
-      />
-    );
+    return <NotFoundPage />;
   }
 
   return (

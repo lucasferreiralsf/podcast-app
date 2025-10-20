@@ -1,4 +1,3 @@
-import { ApiErrorAlert } from "@/shared/components/error/ApiErrorAlert";
 import { Sidebar } from "@/shared/components/layout/Sidebar";
 import { Button } from "@/shared/components/ui/button";
 import { ArrowLeft } from "lucide-react";
@@ -10,16 +9,7 @@ export function PodcastDetailPage() {
   const { podcastId } = useParams<{ podcastId: string }>();
   const navigate = useNavigate();
 
-  const { data, error, refetch } = usePodcastDetail(podcastId!);
-
-  if (error) {
-    return <ApiErrorAlert error={error as Error} onRetry={() => refetch()} />;
-  }
-
-  if (!data) {
-    return null;
-  }
-
+  const { data } = usePodcastDetail(podcastId!);
   const { podcast, episodes } = data;
 
   return (
