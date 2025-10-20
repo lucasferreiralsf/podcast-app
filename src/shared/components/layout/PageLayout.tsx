@@ -1,17 +1,19 @@
-import type { ReactNode } from "react";
+import { Outlet, useMatches } from "react-router";
 import { Header } from "./Header";
+import { Breadcrumbs } from "./Breadcrumbs";
+import { useBreadcrumbs } from "@/shared/hooks/useBreadcrumbs";
 
-interface PageLayoutProps {
-  children: ReactNode;
+interface RouteHandle {
   maxWidth?: "default" | "wide" | "full";
-  breadcrumbs?: ReactNode;
 }
 
-export function PageLayout({
-  children,
-  maxWidth = "default",
-  breadcrumbs,
-}: PageLayoutProps) {
+export function PageLayout() {
+  const matches = useMatches();
+  const breadcrumbItems = useBreadcrumbs();
+
+  const currentMatch = matches[matches.length - 1];
+  const maxWidth = (currentMatch?.handle as RouteHandle)?.maxWidth || "default";
+
   const containerClass =
     maxWidth === "full"
       ? "w-full px-4 sm:px-6 lg:px-8"
@@ -21,8 +23,10 @@ export function PageLayout({
 
   return (
     <div className="min-h-screen flex flex-col bg-muted/30">
-      <Header breadcrumbs={breadcrumbs} />
-      <main className={`flex-1 ${containerClass} py-8`}>{children}</main>
+      <Header breadcrumbs={<Breadcrumbs items={breadcrumbItems} />} />
+      <main className={`flex-1 ${containerClass} py-8`}>
+        <Outlet />
+      </main>
     </div>
   );
 }

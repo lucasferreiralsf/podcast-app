@@ -28,7 +28,9 @@ export class ITunesClient implements IItunesRepository {
   }
 
   async getPodcastById(podcastId: string): Promise<ITunesLookupResponse> {
-    const url = `${this.LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`;
+    const url = `https://api.allorigins.win/get?url=${encodeURIComponent(
+      `${this.LOOKUP_URL}?id=${podcastId}&media=podcast&entity=podcastEpisode&limit=20`
+    )}`;
     const response = await fetch(url);
 
     if (!response.ok) {
@@ -37,7 +39,9 @@ export class ITunesClient implements IItunesRepository {
       );
     }
 
-    const data: ITunesLookupResponse = await response.json();
+    const data: ITunesLookupResponse = JSON.parse(
+      (await response.json()).contents
+    );
 
     return data;
   }
