@@ -12,20 +12,24 @@ A Single Page Application for browsing and listening to music podcasts from Appl
 - **TanStack Query** for data fetching and caching
 - **React Router v6** for client-side routing
 - **Tailwind CSS** + **shadcn/ui** for styling
+- **PNPM** for package management 
 
 ## Installation
 
+### PNPM
+[https://pnpm.io/installation](https://pnpm.io/installation)
+
 ```bash
-npm install
+pnpm install
 ```
 
 ## Development
 
 ```bash
-npm run dev          # Start development server
-npm run build        # Build for production
-npm run preview      # Preview production build
-npm run lint         # Run ESLint
+pnpm run dev          # Start development server
+pnpm run build        # Build for production
+pnpm run preview      # Preview production build
+pnpm run lint         # Run ESLint
 ```
 
 ## Project Structure
