@@ -2,6 +2,9 @@
 
 A Single Page Application for browsing and listening to music podcasts from Apple's iTunes. Features real-time search, episode management, intelligent caching, and a built-in audio player.
 
+## Deployed version
+- [https://podcast-app-lsf.vercel.app](https://podcast-app-lsf.vercel.app)
+
 ## Tech Stack
 
 - **React 18** with TypeScript
